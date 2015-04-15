@@ -30,12 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "pft_modalidad")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Modalidad.findAll", query = "SELECT m FROM Modalidad m"),
-    @NamedQuery(name = "Modalidad.findByModId", query = "SELECT m FROM Modalidad m WHERE m.modId = :modId"),
-    @NamedQuery(name = "Modalidad.findByModCodigo", query = "SELECT m FROM Modalidad m WHERE m.modCodigo = :modCodigo"),
-    @NamedQuery(name = "Modalidad.findByModNombre", query = "SELECT m FROM Modalidad m WHERE m.modNombre = :modNombre")})
-
 @NamedNativeQueries({
     @NamedNativeQuery(name = "Modalidad.ListarModalidades", 
             query="call pft_db.listar_modalidades();",
@@ -48,13 +42,13 @@ public class Modalidad implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "MOD_ID")
-    private Integer modId;
+    private Integer Id;
     @Size(max = 50)
     @Column(name = "MOD_CODIGO")
-    private String modCodigo;
+    private String Codigo;
     @Size(max = 200)
     @Column(name = "MOD_NOMBRE")
-    private String modNombre;
+    private String Nombre;
     @OneToMany(mappedBy = "modId")
     private List<Programa> programaList;
 
@@ -62,31 +56,31 @@ public class Modalidad implements Serializable {
     }
 
     public Modalidad(Integer modId) {
-        this.modId = modId;
+        this.Id = modId;
     }
 
-    public Integer getModId() {
-        return modId;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setModId(Integer modId) {
-        this.modId = modId;
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
-    public String getModCodigo() {
-        return modCodigo;
+    public String getCodigo() {
+        return Codigo;
     }
 
-    public void setModCodigo(String modCodigo) {
-        this.modCodigo = modCodigo;
+    public void setCodigo(String Codigo) {
+        this.Codigo = Codigo;
     }
 
-    public String getModNombre() {
-        return modNombre;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setModNombre(String modNombre) {
-        this.modNombre = modNombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     @XmlTransient
@@ -101,7 +95,7 @@ public class Modalidad implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (modId != null ? modId.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
@@ -112,7 +106,7 @@ public class Modalidad implements Serializable {
             return false;
         }
         Modalidad other = (Modalidad) object;
-        if ((this.modId == null && other.modId != null) || (this.modId != null && !this.modId.equals(other.modId))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -120,7 +114,7 @@ public class Modalidad implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.utpl.rest.modelo.Modalidad[ modId=" + modId + " ]";
+        return "ec.edu.utpl.rest.modelo.Modalidad[ modId=" + Id + " ]";
     }
     
 }
