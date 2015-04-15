@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,6 +35,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Modalidad.findByModId", query = "SELECT m FROM Modalidad m WHERE m.modId = :modId"),
     @NamedQuery(name = "Modalidad.findByModCodigo", query = "SELECT m FROM Modalidad m WHERE m.modCodigo = :modCodigo"),
     @NamedQuery(name = "Modalidad.findByModNombre", query = "SELECT m FROM Modalidad m WHERE m.modNombre = :modNombre")})
+
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Modalidad.ListarModalidades", 
+            query="call pft_db.listar_modalidades();",
+            resultClass = Modalidad.class)
+})
+
 public class Modalidad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

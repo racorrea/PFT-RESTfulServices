@@ -7,6 +7,7 @@
 package ec.edu.utpl.rest.controladores;
 
 import java.util.List;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
 /**
@@ -60,5 +61,46 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+    /*
+    public List<T> proyectoPersona(Object cedula) {
+        Query q = getEntityManager().createNamedQuery("PftPersonaProyecto.ProyectoDePersona");
+        q.setParameter(1, cedula);
+        System.out.println("\n-----------------------------\n");
+        System.out.println(cedula);
+        System.out.println(q.getResultList());
+        System.out.println("\n-----------------------------\n\n");
+        return q.getResultList();
+    }
+    
+    public List<T> mostrarPersonas() {
+        Query q = getEntityManager().createNamedQuery("PftPersona.Personas");
+        System.out.println("\n-----------------------------\n");
+        System.out.println(q);
+        System.out.println("\n-----------------------------\n\n");
+        return q.getResultList();
+    }
+    
+    listar las modalidades
+    listar niveles academicos
+    listar proyecto de una persona por cedula
+    listar todos los proyectos con personas
+    listar personas filtradas por cedula y rol
+    listar a que seccion pertenece una persona
+    listar las personas con su programa, nivel academico y modalidad
+    listar progrmas con su nivel academico, modalidad, filtrado por modalidad
+    listar programas filtrado por nivel academico y modalidad
+    listar programas por nivel academico
+    listar programas por nombre LIKE
+    listar proyectos con su estado de aprobacion
+    listar proyectos con su estado por titulo de proyecto
+    */
+    
+    public List<T> ListarModalidades (){
+        Query q = getEntityManager().createNamedQuery("Modalidad.ListarModalidades");
+        return q.getResultList();
+    }
+    
+    
+    
     
 }
