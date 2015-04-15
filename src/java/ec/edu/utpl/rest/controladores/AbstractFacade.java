@@ -99,6 +99,10 @@ public abstract class AbstractFacade<T> {
         Query q = getEntityManager().createNamedQuery("Modalidad.ListarModalidades");
         return q.getResultList();
     }
+    public List<T> ListarNivelAcademico (){
+        Query q = getEntityManager().createNamedQuery("NivelAcademico.ListarNivelAcademico");
+        return q.getResultList();
+    }
     
     
     

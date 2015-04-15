@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,36 +22,37 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
- * @author roddycorrea
+ * @author roddycorrea 
  */
 @Entity
 @Table(name = "pft_nivel_academico")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "NivelAcademico.findAll", query = "SELECT n FROM NivelAcademico n"),
-    @NamedQuery(name = "NivelAcademico.findByNacId", query = "SELECT n FROM NivelAcademico n WHERE n.nacId = :nacId"),
-    @NamedQuery(name = "NivelAcademico.findByNacNombre", query = "SELECT n FROM NivelAcademico n WHERE n.nacNombre = :nacNombre"),
-    @NamedQuery(name = "NivelAcademico.findByNacDescripcion", query = "SELECT n FROM NivelAcademico n WHERE n.nacDescripcion = :nacDescripcion"),
-    @NamedQuery(name = "NivelAcademico.findByNacCodigo", query = "SELECT n FROM NivelAcademico n WHERE n.nacCodigo = :nacCodigo")})
+//@XmlType(propOrder={"Id", "Nombre", "Descripcion", "Codigo"})
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "NivelAcademico.ListarNivelAcademico", 
+            query="call listar_nivel_academico();",
+            resultClass = NivelAcademico.class)
+})
 public class NivelAcademico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "NAC_ID")
-    private Integer nacId;
+    private Integer Id;
     @Size(max = 45)
     @Column(name = "NAC_NOMBRE")
-    private String nacNombre;
+    private String Nombre;
     @Size(max = 45)
     @Column(name = "NAC_DESCRIPCION")
-    private String nacDescripcion;
+    private String Descripcion;
     @Size(max = 45)
     @Column(name = "NAC_CODIGO")
-    private String nacCodigo;
+    private String Codigo;
     @OneToMany(mappedBy = "nacId")
     private List<Programa> programaList;
 
@@ -57,39 +60,39 @@ public class NivelAcademico implements Serializable {
     }
 
     public NivelAcademico(Integer nacId) {
-        this.nacId = nacId;
+        this.Id = nacId;
     }
 
-    public Integer getNacId() {
-        return nacId;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setNacId(Integer nacId) {
-        this.nacId = nacId;
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
-    public String getNacNombre() {
-        return nacNombre;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setNacNombre(String nacNombre) {
-        this.nacNombre = nacNombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
-    public String getNacDescripcion() {
-        return nacDescripcion;
+    public String getDescripcion() {
+        return Descripcion;
     }
 
-    public void setNacDescripcion(String nacDescripcion) {
-        this.nacDescripcion = nacDescripcion;
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
-    public String getNacCodigo() {
-        return nacCodigo;
+    public String getCodigo() {
+        return Codigo;
     }
 
-    public void setNacCodigo(String nacCodigo) {
-        this.nacCodigo = nacCodigo;
+    public void setCodigo(String Codigo) {
+        this.Codigo = Codigo;
     }
 
     @XmlTransient
@@ -104,7 +107,7 @@ public class NivelAcademico implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nacId != null ? nacId.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
@@ -115,7 +118,7 @@ public class NivelAcademico implements Serializable {
             return false;
         }
         NivelAcademico other = (NivelAcademico) object;
-        if ((this.nacId == null && other.nacId != null) || (this.nacId != null && !this.nacId.equals(other.nacId))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -123,7 +126,7 @@ public class NivelAcademico implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.utpl.rest.modelo.NivelAcademico[ nacId=" + nacId + " ]";
+        return "ec.edu.utpl.rest.modelo.NivelAcademico[ nacId=" + Id + " ]";
     }
     
 }
