@@ -26,7 +26,7 @@ import javax.ws.rs.Produces;
  * @author roddycorrea
  */
 @Stateless
-@Path("ec.edu.utpl.rest.modelo.proyecto")
+@Path("proyecto")
 public class ProyectoFacadeREST extends AbstractFacade<Proyecto> {
     @PersistenceContext(unitName = "PFTRestWSPU")
     private EntityManager em;
@@ -35,54 +35,25 @@ public class ProyectoFacadeREST extends AbstractFacade<Proyecto> {
         super(Proyecto.class);
     }
 
-    @POST
-    @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(Proyecto entity) {
-        super.create(entity);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Proyecto entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
-    }
-
     @GET
-    @Path("{id}")
-    @Produces({"application/xml", "application/json"})
-    public Proyecto find(@PathParam("id") Integer id) {
-        return super.find(id);
+    @Path("listar")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Proyecto> ListarProyectos() {
+        return super.ListarProyectos();
     }
-
     @GET
-    @Override
-    @Produces({"application/xml", "application/json"})
-    public List<Proyecto> findAll() {
-        return super.findAll();
+    @Path("nombre/{nombreProyecto}")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Proyecto> ListarProyectosPorNombre(@PathParam("nombreProyecto") String nombreProyecto) {
+        return super.ListarProyectosPorNombre("%"+nombreProyecto+"%");
     }
-
     @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Proyecto> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("estado/{estado}")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Proyecto> ListarProyectosPorEstado(@PathParam("estado") String estado) {
+        return super.ListarProyectosPorEstado(estado);
     }
-
-    @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;

@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,13 +34,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "pft_proyecto")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Proyecto.findAll", query = "SELECT p FROM Proyecto p"),
-    @NamedQuery(name = "Proyecto.findByProId", query = "SELECT p FROM Proyecto p WHERE p.proId = :proId"),
-    @NamedQuery(name = "Proyecto.findByProTitulo", query = "SELECT p FROM Proyecto p WHERE p.proTitulo = :proTitulo"),
-    @NamedQuery(name = "Proyecto.findByProDuracion", query = "SELECT p FROM Proyecto p WHERE p.proDuracion = :proDuracion"),
-    @NamedQuery(name = "Proyecto.findByProComponenteTeorico", query = "SELECT p FROM Proyecto p WHERE p.proComponenteTeorico = :proComponenteTeorico"),
-    @NamedQuery(name = "Proyecto.findByProComponentePractico", query = "SELECT p FROM Proyecto p WHERE p.proComponentePractico = :proComponentePractico")})
+
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Proyecto.ListarProyectos", 
+            query="call listar_proyectos();",
+            resultClass = Proyecto.class),
+    @NamedNativeQuery(name = "Proyecto.ListarProyectosPorNombre", 
+            query="call listar_proyecto_estado_por_nombre_proyecto(?);",
+            resultClass = Proyecto.class),
+    @NamedNativeQuery(name = "Proyecto.ListarProyectosPorEstado", 
+            query="call listar_proyecto_estado_por_estado(?);",
+            resultClass = Proyecto.class)
+    
+})
 public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

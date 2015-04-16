@@ -155,10 +155,24 @@ public abstract class AbstractFacade<T> {
     public List<T> ListarProgramasPorNombre(Object nombrePrograma){
         Query q = getEntityManager().createNamedQuery("Programa.ListarProgramasPorNombre");
         q.setParameter(1, nombrePrograma);
+        return q.getResultList();
+    }
+    
+    public List<T> ListarProyectos(){
+        Query q = getEntityManager().createNamedQuery("Proyecto.ListarProyectos");
         System.out.println("\n-----------------------------\n");
         System.out.println(q);
-        System.out.println(nombrePrograma);
         System.out.println("\n-----------------------------\n\n");
+        return q.getResultList();
+    }
+    public List<T> ListarProyectosPorNombre(Object nombreProyecto){
+        Query q = getEntityManager().createNamedQuery("Proyecto.ListarProyectosPorNombre");
+        q.setParameter(1, nombreProyecto);
+        return q.getResultList();
+    }
+    public List<T> ListarProyectosPorEstado(Object estado){
+        Query q = getEntityManager().createNamedQuery("Proyecto.ListarProyectosPorEstado");
+        q.setParameter(1, estado);
         return q.getResultList();
     }
     
