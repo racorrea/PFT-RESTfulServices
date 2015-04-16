@@ -33,15 +33,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "pft_programa")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Programa.findAll", query = "SELECT p FROM Programa p"),
-    @NamedQuery(name = "Programa.findByPraId", query = "SELECT p FROM Programa p WHERE p.praId = :praId"),
-    @NamedQuery(name = "Programa.findByPraCodigo", query = "SELECT p FROM Programa p WHERE p.praCodigo = :praCodigo"),
-    @NamedQuery(name = "Programa.findByPraNombre", query = "SELECT p FROM Programa p WHERE p.praNombre = :praNombre")})
+
 @NamedNativeQueries({
     @NamedNativeQuery(name = "Programa.ListarProgramas", 
             query="call listar_programas();",
-            resultClass = Programa.class)
+            resultClass = Programa.class),
+    @NamedNativeQuery(name = "Programa.ListarProgramasPorModalidad", 
+            query="call listar_programas_por_modalidad(?);",
+            resultClass = Programa.class),
+    @NamedNativeQuery(name = "Programa.ListarProgramasPorModalidadYNivelAcademico", 
+            query="call listar_programas_por_modalidad_y_nivelacademico(?, ?);",
+            resultClass = Programa.class),
+    @NamedNativeQuery(name = "Programa.ListarProgramasPorNivelAcademico", 
+            query="call listar_programas_por_nivel_academico(?);",
+            resultClass = Programa.class),
+    @NamedNativeQuery(name = "Programa.ListarProgramasPorNombre", 
+            query="call listar_programas_por_nombre(?);",
+            resultClass = Programa.class),
 })
 
 

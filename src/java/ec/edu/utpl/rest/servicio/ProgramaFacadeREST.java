@@ -26,7 +26,7 @@ import javax.ws.rs.Produces;
  * @author roddycorrea
  */
 @Stateless
-@Path("ec.edu.utpl.rest.modelo.programa")
+@Path("programa")
 public class ProgramaFacadeREST extends AbstractFacade<Programa> {
     @PersistenceContext(unitName = "PFTRestWSPU")
     private EntityManager em;
@@ -35,53 +35,38 @@ public class ProgramaFacadeREST extends AbstractFacade<Programa> {
         super(Programa.class);
     }
 
-    @POST
-    @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(Programa entity) {
-        super.create(entity);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Programa entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
-    }
-
     @GET
-    @Path("{id}")
-    @Produces({"application/xml", "application/json"})
-    public Programa find(@PathParam("id") Integer id) {
-        return super.find(id);
+    @Path("listar")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Programa> listarProgramas() {
+        return super.ListarProgramas();
     }
-
+    
     @GET
-    @Override
-    @Produces({"application/xml", "application/json"})
-    public List<Programa> findAll() {
-        return super.findAll();
+    @Path("{modalidad}")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Programa> ListarProgramasPorModalidad(@PathParam("modalidad") String modalidad) {
+        return super.ListarProgramasPorModalidad(modalidad);
     }
-
     @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Programa> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("{modalidad}/{nivelacademico}")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Programa> ListarProgramasPorModalidadYNivelAcademico(@PathParam("modalidad") String modalidad, @PathParam("nivelacademico") String nivelAcademico) {
+        return super.ListarProgramasPorModalidadYNivelAcademico(modalidad, nivelAcademico);
     }
-
     @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
+    @Path("nivel/{nivelacademico}")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Programa> ListarProgramasPorNivelAcademico(@PathParam("nivelacademico") String nivelAcademico) {
+        return super.ListarProgramasPorNivelAcademico(nivelAcademico);
     }
+    @GET
+    @Path("pornombre/{nombrePrograma}")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Programa> ListarProgramasPorNombre(@PathParam("nombrePrograma") String nombrePrograma) {
+        return super.ListarProgramasPorNombre("%"+nombrePrograma+"%");
+    }
+    
 
     @Override
     protected EntityManager getEntityManager() {

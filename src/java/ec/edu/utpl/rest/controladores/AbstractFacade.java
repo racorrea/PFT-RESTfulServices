@@ -132,6 +132,36 @@ public abstract class AbstractFacade<T> {
         q.setParameter(1, cedula);
         return q.getResultList();
     }
+    public List<T> ListarProgramas(){
+        Query q = getEntityManager().createNamedQuery("Programa.ListarProgramas");
+        return q.getResultList();
+    }
+    public List<T> ListarProgramasPorModalidad(Object modalidad){
+        Query q = getEntityManager().createNamedQuery("Programa.ListarProgramasPorModalidad");
+        q.setParameter(1, modalidad);
+        return q.getResultList();
+    }
+    public List<T> ListarProgramasPorModalidadYNivelAcademico(Object modalidad, Object nivelAcademico){
+        Query q = getEntityManager().createNamedQuery("Programa.ListarProgramasPorModalidadYNivelAcademico");
+        q.setParameter(1, modalidad);
+        q.setParameter(2, nivelAcademico);
+        return q.getResultList();
+    }
+    public List<T> ListarProgramasPorNivelAcademico(Object nivelAcademico){
+        Query q = getEntityManager().createNamedQuery("Programa.ListarProgramasPorNivelAcademico");
+        q.setParameter(1, nivelAcademico);
+        return q.getResultList();
+    }
+    public List<T> ListarProgramasPorNombre(Object nombrePrograma){
+        Query q = getEntityManager().createNamedQuery("Programa.ListarProgramasPorNombre");
+        q.setParameter(1, nombrePrograma);
+        System.out.println("\n-----------------------------\n");
+        System.out.println(q);
+        System.out.println(nombrePrograma);
+        System.out.println("\n-----------------------------\n\n");
+        return q.getResultList();
+    }
+    
     
     
     

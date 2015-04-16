@@ -37,42 +37,42 @@ public class PersonaFacadeREST extends AbstractFacade<Persona> {
 
     @GET
     @Path("{cedula}/proyecto")
-    @Produces({"application/json"})
+    @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonaConProyectoPorCedula(@PathParam("cedula") String cedula) {
         return super.ListarPersonaProyectoPorCedula(cedula);
     }
     
     @GET
     @Path("proyecto")
-    @Produces({"application/json"})
+    @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarTodasPersonaConProyecto() {
         return super.ListarTodosPersonasConProyecto();
     }
     
     @GET
     @Path("{rol}/{cedula}")
-    @Produces({"application/json"})
+    @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonaProyectoPorCedulaYRol(@PathParam("rol") String rol,@PathParam("cedula") String cedula){
         return super.ListarPersonaConProyectoPorCedulaYRol(rol, cedula);
     }
     
     @GET
     @Path("{cedula}/seccion")
-    @Produces({"application/json"})
+    @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonaSeccionPorCedula(@PathParam("cedula") String cedula) {
         return super.ListarPersonaSeccionPorCedula(cedula);
     }
     
     @GET
     @Path("programa/nivelacademico/modalidad")
-    @Produces({"application/json"})
+    @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonasTipoNivelAcademicoModalidad() {
         return super.ListarPersonasTipoNivelAcademicoModalidad();
     }
     
     @GET
     @Path("{cedula}/programa/nivelacademico/modalidad")
-    @Produces({"application/json"})
+    @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonasTipoNivelAcademicoModalidadPorCedula(@PathParam("cedula") String cedula) {
         return super.ListarPersonasTipoNivelAcademicoModalidadPorCedula(cedula);
     }
