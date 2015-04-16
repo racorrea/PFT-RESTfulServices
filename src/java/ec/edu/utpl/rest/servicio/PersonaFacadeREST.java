@@ -26,7 +26,7 @@ import javax.ws.rs.Produces;
  * @author roddycorrea
  */
 @Stateless
-@Path("ec.edu.utpl.rest.modelo.persona")
+@Path("persona")
 public class PersonaFacadeREST extends AbstractFacade<Persona> {
     @PersistenceContext(unitName = "PFTRestWSPU")
     private EntityManager em;
@@ -35,52 +35,46 @@ public class PersonaFacadeREST extends AbstractFacade<Persona> {
         super(Persona.class);
     }
 
-    @POST
-    @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(Persona entity) {
-        super.create(entity);
-    }
-
-    @PUT
-    @Path("{id}")
-    @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Persona entity) {
-        super.edit(entity);
-    }
-
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
-    }
-
     @GET
-    @Path("{id}")
-    @Produces({"application/xml", "application/json"})
-    public Persona find(@PathParam("id") Integer id) {
-        return super.find(id);
+    @Path("{cedula}/proyecto")
+    @Produces({"application/json"})
+    public List<Persona> listarPersonaConProyectoPorCedula(@PathParam("cedula") String cedula) {
+        return super.ListarPersonaProyectoPorCedula(cedula);
     }
-
+    
     @GET
-    @Override
-    @Produces({"application/xml", "application/json"})
-    public List<Persona> findAll() {
-        return super.findAll();
+    @Path("proyecto")
+    @Produces({"application/json"})
+    public List<Persona> listarTodasPersonaConProyecto() {
+        return super.ListarTodosPersonasConProyecto();
     }
-
+    
     @GET
-    @Path("{from}/{to}")
-    @Produces({"application/xml", "application/json"})
-    public List<Persona> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
+    @Path("{rol}/{cedula}")
+    @Produces({"application/json"})
+    public List<Persona> listarPersonaProyectoPorCedulaYRol(@PathParam("rol") String rol,@PathParam("cedula") String cedula){
+        return super.ListarPersonaConProyectoPorCedulaYRol(rol, cedula);
     }
-
+    
     @GET
-    @Path("count")
-    @Produces("text/plain")
-    public String countREST() {
-        return String.valueOf(super.count());
+    @Path("{cedula}/seccion")
+    @Produces({"application/json"})
+    public List<Persona> listarPersonaSeccionPorCedula(@PathParam("cedula") String cedula) {
+        return super.ListarPersonaSeccionPorCedula(cedula);
+    }
+    
+    @GET
+    @Path("programa/nivelacademico/modalidad")
+    @Produces({"application/json"})
+    public List<Persona> listarPersonasTipoNivelAcademicoModalidad() {
+        return super.ListarPersonasTipoNivelAcademicoModalidad();
+    }
+    
+    @GET
+    @Path("{cedula}/programa/nivelacademico/modalidad")
+    @Produces({"application/json"})
+    public List<Persona> listarPersonasTipoNivelAcademicoModalidadPorCedula(@PathParam("cedula") String cedula) {
+        return super.ListarPersonasTipoNivelAcademicoModalidadPorCedula(cedula);
     }
 
     @Override

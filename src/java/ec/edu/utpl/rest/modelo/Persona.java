@@ -18,6 +18,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,19 +37,30 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "pft_persona")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p"),
-    @NamedQuery(name = "Persona.findByEntId", query = "SELECT p FROM Persona p WHERE p.entId = :entId"),
-    @NamedQuery(name = "Persona.findByEntIdentificacion", query = "SELECT p FROM Persona p WHERE p.entIdentificacion = :entIdentificacion"),
-    @NamedQuery(name = "Persona.findByPerGeneroId", query = "SELECT p FROM Persona p WHERE p.perGeneroId = :perGeneroId"),
-    @NamedQuery(name = "Persona.findByPerNombre", query = "SELECT p FROM Persona p WHERE p.perNombre = :perNombre"),
-    @NamedQuery(name = "Persona.findByPerPrimerNombre", query = "SELECT p FROM Persona p WHERE p.perPrimerNombre = :perPrimerNombre"),
-    @NamedQuery(name = "Persona.findByPerSegundoNombre", query = "SELECT p FROM Persona p WHERE p.perSegundoNombre = :perSegundoNombre"),
-    @NamedQuery(name = "Persona.findByPerPrimerApellido", query = "SELECT p FROM Persona p WHERE p.perPrimerApellido = :perPrimerApellido"),
-    @NamedQuery(name = "Persona.findByPerSegundoApellido", query = "SELECT p FROM Persona p WHERE p.perSegundoApellido = :perSegundoApellido"),
-    @NamedQuery(name = "Persona.findByPerFechaNacimiento", query = "SELECT p FROM Persona p WHERE p.perFechaNacimiento = :perFechaNacimiento"),
-    @NamedQuery(name = "Persona.findByPerUsuario", query = "SELECT p FROM Persona p WHERE p.perUsuario = :perUsuario"),
-    @NamedQuery(name = "Persona.findByPerClave", query = "SELECT p FROM Persona p WHERE p.perClave = :perClave")})
+
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Persona.ListarPersonaProyectoPorCedula", 
+            query="call listar_persona_con_proyecto_por_cedula(?);",
+            resultClass = Persona.class),
+    @NamedNativeQuery(name = "Persona.ListarTodasPersonasConProyectos", 
+            query="call listar_personas_con_proyectos();",
+            resultClass = Persona.class),
+    @NamedNativeQuery(name = "Persona.ListarPersonaConProyectoPorCedulaYRol", 
+            query="call listar_personas_por_rol_y_cedula(?, ?);",
+            resultClass = Persona.class),
+    @NamedNativeQuery(name = "Persona.ListarSeccionPorCedula", 
+            query="call listar_personas_seccion_por_cedula(?);",
+            resultClass = Persona.class),
+    @NamedNativeQuery(name = "Persona.ListarPersonasTipoNivelAcademicoModalidad", 
+            query="call listar_personas_tipo_nivelacademico_modalidad();",
+            resultClass = Persona.class),
+    @NamedNativeQuery(name = "Persona.ListarPersonasTipoNivelAcademicoModalidadPorCedula", 
+            query="call listar_personas_tipo_nivelacademico_modalidad_por_cedula(?);",
+            resultClass = Persona.class)
+        
+})
+
+
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

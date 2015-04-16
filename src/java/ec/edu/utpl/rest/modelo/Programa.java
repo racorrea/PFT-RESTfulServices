@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,6 +38,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Programa.findByPraId", query = "SELECT p FROM Programa p WHERE p.praId = :praId"),
     @NamedQuery(name = "Programa.findByPraCodigo", query = "SELECT p FROM Programa p WHERE p.praCodigo = :praCodigo"),
     @NamedQuery(name = "Programa.findByPraNombre", query = "SELECT p FROM Programa p WHERE p.praNombre = :praNombre")})
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Programa.ListarProgramas", 
+            query="call listar_programas();",
+            resultClass = Programa.class)
+})
+
+
+
 public class Programa implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

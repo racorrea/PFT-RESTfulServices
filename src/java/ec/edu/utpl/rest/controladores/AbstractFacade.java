@@ -103,7 +103,35 @@ public abstract class AbstractFacade<T> {
         Query q = getEntityManager().createNamedQuery("NivelAcademico.ListarNivelAcademico");
         return q.getResultList();
     }
-    
+    public List<T> ListarPersonaProyectoPorCedula (Object cedula){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarPersonaProyectoPorCedula");
+        q.setParameter(1, cedula);
+        return q.getResultList();
+    }
+    public List<T> ListarTodosPersonasConProyecto(){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarTodasPersonasConProyectos");
+        return q.getResultList();
+    }
+    public List<T> ListarPersonaConProyectoPorCedulaYRol(Object rol, Object cedula){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarPersonaConProyectoPorCedulaYRol");
+        q.setParameter(1, rol);
+        q.setParameter(2, cedula);
+        return q.getResultList();
+    }
+    public List<T> ListarPersonaSeccionPorCedula (Object cedula){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarSeccionPorCedula");
+        q.setParameter(1, cedula);
+        return q.getResultList();
+    }
+    public List<T> ListarPersonasTipoNivelAcademicoModalidad (){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarPersonasTipoNivelAcademicoModalidad");
+        return q.getResultList();
+    }
+    public List<T> ListarPersonasTipoNivelAcademicoModalidadPorCedula (Object cedula){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarPersonasTipoNivelAcademicoModalidadPorCedula");
+        q.setParameter(1, cedula);
+        return q.getResultList();
+    }
     
     
     
