@@ -31,17 +31,9 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(ec.edu.utpl.rest.servicio.AproEstadoFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.AprobacionFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.DepartamentoFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.ModalidadFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.NivelAcademicoFacadeREST.class);
         resources.add(ec.edu.utpl.rest.servicio.PersonaFacadeREST.class);
         resources.add(ec.edu.utpl.rest.servicio.ProgramaFacadeREST.class);
         resources.add(ec.edu.utpl.rest.servicio.ProyectoFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.RolFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.SeccionFacadeREST.class);
-        resources.add(ec.edu.utpl.rest.servicio.VariacionFacadeREST.class);
         
     }
     
