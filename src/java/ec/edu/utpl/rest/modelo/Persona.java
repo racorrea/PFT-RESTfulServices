@@ -29,6 +29,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -39,6 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 
 @NamedNativeQueries({
+    @NamedNativeQuery(name = "Persona.ListarPersonas", 
+            query="call listar_personas();",
+            resultClass = Persona.class),
     @NamedNativeQuery(name = "Persona.ListarPersonaProyectoPorCedula", 
             query="call listar_persona_con_proyecto_por_cedula(?);",
             resultClass = Persona.class),

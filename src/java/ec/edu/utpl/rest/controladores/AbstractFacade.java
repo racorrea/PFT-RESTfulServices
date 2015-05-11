@@ -95,6 +95,10 @@ public abstract class AbstractFacade<T> {
     listar proyectos con su estado por titulo de proyecto
     */
     
+    public List<T> ListarPersonas (){
+        Query q = getEntityManager().createNamedQuery("Persona.ListarPersonas");
+        return q.getResultList();
+    }
     public List<T> ListarModalidades (){
         Query q = getEntityManager().createNamedQuery("Modalidad.ListarModalidades");
         return q.getResultList();

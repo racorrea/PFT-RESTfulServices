@@ -36,6 +36,13 @@ public class PersonaFacadeREST extends AbstractFacade<Persona> {
     }
 
     @GET
+    @Path("listar")
+    @Produces({"application/json"+ ";charset=utf-8"})
+    public List<Persona> listarPersonas() {
+        return super.ListarPersonas();
+    }
+    
+    @GET
     @Path("{cedula}/proyecto")
     @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonaConProyectoPorCedula(@PathParam("cedula") String cedula) {
