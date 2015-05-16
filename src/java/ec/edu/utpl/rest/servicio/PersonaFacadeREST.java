@@ -7,6 +7,8 @@
 package ec.edu.utpl.rest.servicio;
 
 import ec.edu.utpl.rest.controladores.AbstractFacade;
+import ec.edu.utpl.rest.controladores.Util;
+
 import ec.edu.utpl.rest.modelo.Persona;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -46,6 +48,7 @@ public class PersonaFacadeREST extends AbstractFacade<Persona> {
     @Path("{cedula}/proyecto")
     @Produces({"application/json"+ ";charset=utf-8"})
     public List<Persona> listarPersonaConProyectoPorCedula(@PathParam("cedula") String cedula) {
+        
         return super.ListarPersonaProyectoPorCedula(cedula);
     }
     

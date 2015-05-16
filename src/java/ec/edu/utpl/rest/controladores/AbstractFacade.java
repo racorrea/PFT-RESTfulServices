@@ -5,7 +5,7 @@
  */
 
 package ec.edu.utpl.rest.controladores;
-
+import ec.edu.utpl.rest.controladores.Util;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -16,6 +16,8 @@ import javax.persistence.EntityManager;
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
+    
+    Util u = new Util();
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -108,8 +110,10 @@ public abstract class AbstractFacade<T> {
         return q.getResultList();
     }
     public List<T> ListarPersonaProyectoPorCedula (Object cedula){
+        String parametro = u.limpiarXSS(cedula.toString());
+        System.out.println(parametro);
         Query q = getEntityManager().createNamedQuery("Persona.ListarPersonaProyectoPorCedula");
-        q.setParameter(1, cedula);
+        q.setParameter(1, parametro);
         return q.getResultList();
     }
     public List<T> ListarTodosPersonasConProyecto(){

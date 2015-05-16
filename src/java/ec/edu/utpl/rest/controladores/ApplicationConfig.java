@@ -17,6 +17,10 @@ import javax.ws.rs.core.Application;
 @javax.ws.rs.ApplicationPath("ws")
 public class ApplicationConfig extends Application {
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
